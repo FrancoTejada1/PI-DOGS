@@ -1,0 +1,124 @@
+body, html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.bg_create {
+  background-image: url("../../images/create.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.bt_back_create {
+  margin: 15px 0 0 10px;
+  width: 10%;
+  height: 5%;
+  cursor: pointer;
+  border: none;
+  background: #000000c7;
+  color: white;
+  font-size: larger;
+  border-radius: 20px;
+  padding: 3px;
+  font-family: "Kanit", sans-serif;
+}
+
+.validation {
+  position: relative;
+  left: 30%;
+  font-size: larger;
+  font-weight: 1000;
+  color: red;
+  font-family: "Kanit";
+  width: max-content;
+  top: 0;
+}
+
+.title_create {
+  position: relative;
+  top: 8%;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  height: 6%;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  width: 100%;
+  height: 70%;
+}
+
+.label {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  bottom: 0;
+  left: 20px;
+}
+
+.input {
+  padding: 0px 20px 0px;
+  font-size: 17px;
+  width: 300px;
+  height: 45px;
+  border-radius: 20px 20px;
+  background: rgba(0, 0, 0, 0.36);
+  color: white;
+  font-family: "Kanit", sans-serif;
+  border: solid black 2px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.select {
+  padding: 0px 20px 0px;
+  font-size: 17px;
+  width: 344px;
+  height: 50px;
+  border-radius: 20px 20px;
+  background: rgba(0, 0, 0, 0.36);
+  color: white;
+  font-family: "Kanit", sans-serif;
+  border: solid black 2px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.temps_concats {
+  margin: 30px 10px 10px;
+  font-family: "Kanit", sans-serif;
+  color: black;
+  font-weight: bolder;
+}
+
+.bt_create {
+  cursor: pointer;
+  border: none;
+  border-radius: 20px 20px;
+  display: inline-block;
+  width: 84px;
+  height: 45px;
+  background: rgba(255, 107, 18, 0.64);
+  font-family: "Kanit", sans-serif;
+  font-weight: bolder;
+  position: relative;
+  left: 130px;
+}
+
+.bt_create:active {
+  transform: scale(0.98);
+  box-shadow: 3px 3px 9px black;
+}

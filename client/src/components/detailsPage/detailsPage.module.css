@@ -1,0 +1,39 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg_details {
+  background-image: url("../../images/details.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.a_back_details {
+  text-decoration: none;
+  height: 5%;
+  width: 5%;
+  margin: 10px 20px;
+}
+
+.boton {
+  width: 7%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  background: white;
+  color: black;
+  font-size: larger;
+  border-radius: 20px;
+  padding: 2px;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}

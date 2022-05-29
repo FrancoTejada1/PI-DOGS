@@ -1,0 +1,56 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.landing {
+  background-image: url("../../images/bg-landing2.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.bg_text {
+  display: inline-flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  height: 60%;
+  width: 40%;
+  margin-left: 2%;
+  color: goldenrod;
+  text-shadow: 2px 7px 4px black;
+  font-size: xx-large;
+  text-align: center;
+  font-family: "Kanit", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.boton {
+  display: inline-flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  border-radius: 20px;
+  border: none;
+  padding: 0 25px;
+  cursor: pointer;
+  font-size: smaller;
+  background: #8080805e;
+  color: goldenrod;
+  font-family: "Kanit", sans-serif;
+  text-shadow: 3px -1px 3px black;
+}
+
+.boton:active {
+  transform: scale(0.98);
+  box-shadow: 3px 3px 9px black;
+}
