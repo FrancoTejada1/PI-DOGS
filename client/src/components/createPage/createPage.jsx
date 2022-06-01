@@ -33,6 +33,10 @@ export default function CreatePage() {
 
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    dispatch(getTemperaments());
+  }, [dispatch]);
+
   const handlerChange = (e) => {
     setRaces({
       ...race,
@@ -48,15 +52,11 @@ export default function CreatePage() {
   };
 
   const handlerBlur = (e) => {
-    handlerChange(e);
+    /* handlerChange(e);
     handlerSelect(e);
-    setErrors(validation(errors));
+    setErrors(validation(errors)); */
   };
-
-  useEffect(() => {
-    dispatch(getTemperaments());
-  }, [dispatch]);
-
+  
   const handlerSubmit = (e) => {
     e.preventDefault();
     console.log(race);

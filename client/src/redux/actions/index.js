@@ -44,10 +44,12 @@ export function raceByName(name) {
 export function raceById(id) {
   return function (dispatch) {
     axios.get(`http://localhost:3001/dogs/${id}`)
+    
     .then((json) => {
+      console.log(json.data[0])
         dispatch({
             type: GET_RACE_BY_ID,
-            payload: json.data,
+            payload: json.data[0],
         });
     })
     .catch((error) => {

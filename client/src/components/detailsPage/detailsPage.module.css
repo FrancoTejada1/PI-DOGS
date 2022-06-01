@@ -17,6 +17,13 @@ body {
   width: 100%;
 }
 
+.details {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}
+
 .a_back_details {
   text-decoration: none;
   height: 5%;
@@ -25,7 +32,7 @@ body {
 }
 
 .boton {
-  width: 7%;
+  width: 100%;
   height: 100%;
   cursor: pointer;
   border: none;
@@ -36,4 +43,69 @@ body {
   padding: 2px;
   font-family: "Kanit", sans-serif;
   font-weight: bold;
+}
+
+.with_img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: center;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.without_img {
+  width: 100%;
+  height: max-content;
+  display: inline-flex;
+  flex-flow: column wrap;
+  align-content: center;
+  position: relative;
+  top: 15%;
+  right: 4%;
+  text-align: center;
+  background: #00000073;
+  padding: 10px 47px;
+  color: white;
+  border-radius: 20px;
+  font-family: "Kanit", sans-serif;
+}
+
+.img_holder {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  position: relative;
+  top: 0%;
+  right: 5%;
+  width: 45%;
+  height: 60%;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.info {
+  display: inline-flex;
+  flex-flow: column wrap;
+  position: relative;
+  top: 0%;
+  right: 0;
+  text-align: center;
+  background: #00000073;
+  padding: 10px 47px;
+  color: white;
+  border-radius: 20px;
+  font-family: "Kanit", sans-serif;
+  width: 40%;
+}
+
+.loading {
+  position: absolute;
+  left: 46%;
+  top: 37%;
+  height: 10%;
+  width: 5%;
+  background: #0000009c;
+  border-radius: 20px;
+  padding: 10px;
 }

@@ -58,7 +58,7 @@ html {
 }
 
 .select {
-  padding: 5px 6px;
+  padding: 5px 3px;
   font-family: "Kanit", sans-serif;
   background: rgba(0, 0, 0, 0.75);
   border-radius: 20px;
@@ -67,4 +67,15 @@ html {
   font-size: medium;
   margin: 4px;
   cursor: pointer;
+}
+
+.loading {
+  position: absolute;
+  left: 46%;
+  top: 50%;
+  height: 10%;
+  width: 5%;
+  background: #0000009c;
+  border-radius: 20px;
+  padding: 10px;
 }

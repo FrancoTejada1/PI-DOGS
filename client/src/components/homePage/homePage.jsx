@@ -39,24 +39,26 @@ export default function HomePage() {
 
   const handlerFilterByTemps = (e) => {
     dispatch(filterByTemperaments(e.target.value));
+    setPage(1)
   };
 
   const handlerFilterByUploaded = (e) => {
     dispatch(filterByUploaded(e.target.value));
+    setPage(1)
   };
 
   const handlerSortByName = (e) => {
     e.preventDefault();
     dispatch(sortByName(e.target.value));
     setPage(1);
-    setOrder(`Ordenado ${e.target.value}`);
+    setOrder(e.target.value);
   };
 
   const handlerSortByWeight = (e) => {
     e.preventDefault();
     dispatch(sortByWeight(e.target.value));
     setPage(1);
-    setOrder(`Ordenado ${e.target.value}`);
+    setOrder(e.target.value);
   };
 
   console.log(temperaments);
@@ -93,11 +95,12 @@ export default function HomePage() {
         </select>
       </div>
       <Pagination dogs={dogs} races={races.length} pagination={pagination} />
+      {dogsByPages.length ? (
       <div>
         {dogsByPages?.map((r) => {
           return (
             <Cards
-              key={r.key}
+              key={r.id}
               id={r.id}
               img={r.img}
               name={r.name}
@@ -107,6 +110,7 @@ export default function HomePage() {
           );
         })}
       </div>
+      ) : ( <img className={style.loading} src="https://c.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif" alt=" "/>)}
     </div>
   );
 }
