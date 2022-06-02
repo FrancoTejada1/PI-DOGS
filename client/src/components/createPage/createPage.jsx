@@ -4,15 +4,15 @@ import { useNavigate, Link } from "react-router-dom";
 import { getTemperaments, postRaces } from "../../redux/actions/index.js";
 import style from "./createPage.module.css";
 
-const validation = (dogs) => {
-  var errors = {};
+const validation = (race) => {
+  let errors = {};
 
-  if (!dogs.name.trim()) {
-    errors.name = "Require name";
-  } else if (!dogs.height) {
-    errors.height = "Require height";
-  } else if (!dogs.weight) {
-    errors.weight = "Require weight";
+  if (!race.name.trim()) {
+    errors.name = "Name is required";
+  } else if (!race.height) {
+    errors.height = "Height is required with the format";
+  } else if (!race.weight) {
+    errors.weight = "Weight is required with the format";
   }
   return errors;
 };
@@ -32,32 +32,34 @@ export default function CreatePage() {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState(null);
 
   useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
 
-  const handlerChange = (e) => {
+  const handleChange = (e) => {// para que detecte cuando estamos escribiendo y haga el cambio de los valores
     setRaces({
       ...race,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handlerSelect = (e) => {
+  const handleSelect = (e) => {// para que detecte cuando seleccionamos y haga el cambio de valores
     setRaces({
       ...race,
       temperaments: [...race.temperaments, e.target.value],
     });
   };
 
-  const handlerBlur = (e) => {
-    /* handlerChange(e);
-    handlerSelect(e);
-    setErrors(validation(errors)); */
+  const handleBlur = (e) => {// aqui es donde se haran las validaciones y este mismo las lance
+    handleChange(e);
+    setErrors(validation(race));// la funcion validation va a funcionar dentro de la variable de estado de los errores
+                                //  y validara las variables del formulario
   };
   
-  const handlerSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(race);
     dispatch(postRaces(race));
@@ -81,7 +83,7 @@ export default function CreatePage() {
         <h1 className={style.title_create}>Create your Race</h1>
       </div>
       <div className={style.inputs}>
-        <form onSubmit={(e) => handlerSubmit(e)}>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <div>
             <label className={style.label}>Name: </label>
             <input 
@@ -90,9 +92,11 @@ export default function CreatePage() {
               name="name"
               value={race.name}
               placeholder="Name of race..."
-              onBlur={(e) => handlerBlur(e)}
-              onChange={(e) => handlerChange(e)}
+              onBlur={(e) => handleBlur(e)}
+              onChange={(e) => handleChange(e)}
+              required
             />
+            {errors.name && <p className={style.errors}>{errors.name}</p> }
           </div>
           <div>
             <label className={style.label}>Height: </label>
@@ -102,9 +106,11 @@ export default function CreatePage() {
               name="height"
               value={race.height}
               placeholder="20 - 30..."
-              onBlur={(e) => handlerBlur(e)}
-              onChange={(e) => handlerChange(e)}
+              onBlur={(e) => handleBlur(e)}
+              onChange={(e) => handleChange(e)}
+              required
             />
+            {errors.height && <p className={style.errors}>{errors.height}</p>}
           </div>
           <div>
             <label className={style.label}>Weight: </label>
@@ -114,9 +120,11 @@ export default function CreatePage() {
               name="weight"
               value={race.weight}
               placeholder="4 - 7..."
-              onBlur={(e) => handlerBlur(e)}
-              onChange={(e) => handlerChange(e)}
+              onBlur={(e) => handleBlur(e)}
+              onChange={(e) => handleChange(e)}
+              required
             />
+            {errors.weight && <p className={style.errors}>{errors.weight}</p>}
           </div>
           <div>
             <label className={style.label}>Years of Life: </label>
@@ -126,12 +134,12 @@ export default function CreatePage() {
               name="yearsOfLife"
               value={race.yearsOfLife}
               placeholder="10 years..."
-              onChange={(e) => handlerChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </div>
           <div>
             <label className={style.label}>Temperaments: </label>
-            <select className={style.select} onChange={(e) => handlerSelect(e)}>
+            <select className={style.select} onChange={(e) => handleSelect(e)}>
               {temperaments?.map((t, i) => {
                 return <option key={i}>{t.name}</option>;
               })}

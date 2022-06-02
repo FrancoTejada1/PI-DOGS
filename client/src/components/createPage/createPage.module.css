@@ -122,3 +122,8 @@ body, html {
   transform: scale(0.98);
   box-shadow: 3px 3px 9px black;
 }
+
+.errors {
+  font-weight: bold;
+  color: #dc3545;
+}
