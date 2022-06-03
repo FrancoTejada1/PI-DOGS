@@ -40,11 +40,9 @@ export default function DetailsPage() {
                     : null}
                   </li>
                 </ul>
-                <h3 className={style.height}>Height: {allDetails.height}</h3>
-                <h3 className={style.weight}>Weight: {allDetails.weight}</h3>
-                <h3 className={style.years}>
-                  Years of Life: {allDetails.yearsOfLife}
-                </h3>
+                <h3 className={style.height}>Height: {allDetails.height} cm</h3>
+                <h3 className={style.weight}>Weight: {allDetails.weight} kg</h3>
+                <h3 className={style.years}>Years of Life: {allDetails.yearsOfLife}</h3>
               </div>
             </div>
           ) : (
@@ -57,8 +55,8 @@ export default function DetailsPage() {
                     : allDetails.temperaments
                   : null}
               </h2>
-              <h3>Height: {allDetails.height}</h3>
-              <h3>Weight: {allDetails.weight}</h3>
+              <h3>Height: {allDetails.height} cm</h3>
+              <h3>Weight: {allDetails.weight} kg</h3>
               <h3>Years of Life: {allDetails.yearsOfLife}</h3>
             </div>
           )}

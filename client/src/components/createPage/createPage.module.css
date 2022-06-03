@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
   width: 100%;
   height: 100%;
@@ -30,17 +31,6 @@ body, html {
   font-family: "Kanit", sans-serif;
 }
 
-.validation {
-  position: relative;
-  left: 30%;
-  font-size: larger;
-  font-weight: 1000;
-  color: red;
-  font-family: "Kanit";
-  width: max-content;
-  top: 0;
-}
-
 .title_create {
   position: relative;
   top: 8%;
@@ -51,34 +41,126 @@ body, html {
   height: 6%;
 }
 
-.inputs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  position: relative;
+.wrapper {
+  background-color: transparent;
   width: 100%;
-  height: 70%;
+  height: max-content;
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  border: none;
 }
 
+.wrapper > * {
+  padding: 1em;
+}
+
+.form {
+  background-color: #22222296;
+  box-shadow: 0 0 20px 0 rgb(41 42 47);
+  display: grid;
+  justify-content: center;
+}
+
+.form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form form .full_width {
+  grid-column: 2 / 4;
+}
+
+.form form .boton {
+  grid-column: 2 / 2;
+}
+
+.form form p {
+  margin: 0;
+  padding: 1em;
+}
+
+.form form input,
+.form form button {
+  width: 100%;
+  padding: 0.7em;
+  border: none;
+  background: none;
+  border-bottom: 1px solid red;
+  color: white;
+}
+
+.form form select {
+  /* width: 100%;
+  padding: 0.7em;
+  border: none;
+  background: none;
+  color: white;
+  margin: 15px 0; */
+  grid-column: 2 / 4;
+  width: 100%;
+  padding: 0.7em;
+  border: none;
+  background: none;
+  border-bottom: 1px solid red;
+  color: white;
+}
+
+.form form button {
+  background: red;
+  border: none;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.form form button:active {
+  transform: scale(0.98);
+  box-shadow: 3px 3px 9px black;
+}
+
+.form form select option {
+  background: rgba(60, 57, 64);
+  text-align: center;
+}
+
+.temps_concats {
+  grid-column: 1 / 4;
+  font-family: "Kanit", sans-serif;
+  color: black;
+  font-weight: bolder;
+}
+/*
+.inputs {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+}
+*/
 .label {
   display: flex;
   justify-content: flex-start;
   position: relative;
-  bottom: 0;
   left: 20px;
+  font-weight: unset;
+  font-family: "Kanit", sans-serif;
+  font-size: larger;
+  color: #fafafa;
 }
-
+/*
 .input {
   padding: 0px 20px 0px;
   font-size: 17px;
-  width: 300px;
-  height: 45px;
+  width: 83%;
+  height: 40px;
   border-radius: 20px 20px;
-  background: rgba(0, 0, 0, 0.36);
-  color: white;
+  background: rgb(0 0 0 / 72%);
   font-family: "Kanit", sans-serif;
-  border: solid black 2px;
+  border: solid white 3px;
   margin: 5px 0;
   font-weight: bold;
 }
@@ -86,44 +168,39 @@ body, html {
 .select {
   padding: 0px 20px 0px;
   font-size: 17px;
-  width: 344px;
-  height: 50px;
+  width: 100%;
+  height: 46px;
   border-radius: 20px 20px;
-  background: rgba(0, 0, 0, 0.36);
-  color: white;
+  background: rgb(0 0 0 / 72%);
+  color: #757575;
   font-family: "Kanit", sans-serif;
-  border: solid black 2px;
+  border: solid white 3px;
   margin: 5px 0;
   font-weight: bold;
 }
 
-.temps_concats {
-  margin: 30px 10px 10px;
-  font-family: "Kanit", sans-serif;
-  color: black;
-  font-weight: bolder;
-}
+
 
 .bt_create {
   cursor: pointer;
   border: none;
   border-radius: 20px 20px;
-  display: inline-block;
-  width: 84px;
+  width: 100%;
   height: 45px;
   background: rgba(255, 107, 18, 0.64);
   font-family: "Kanit", sans-serif;
   font-weight: bolder;
-  position: relative;
-  left: 130px;
+  font-size: larger;
 }
 
 .bt_create:active {
   transform: scale(0.98);
   box-shadow: 3px 3px 9px black;
-}
+} */
 
 .errors {
   font-weight: bold;
   color: #dc3545;
+  margin: 5px 5px;
+  text-align: center;
 }

@@ -84,7 +84,11 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const {id, name, height, weight, yearsOfLife, createdInDB, temperaments} = req.body;
+  const {id, name, heightMin, heightMax, weightMin, weightMax, yearsOfLifeMin, yearsOfLifeMax, createdInDB, temperaments} = req.body;
+
+  let height = `${heightMin} - ${heightMax}`;
+  let weight = `${weightMin} - ${weightMax}`;
+  let yearsOfLife = `${yearsOfLifeMin} - ${yearsOfLifeMax} years`;
 
   const newRace = await Race.create({
     id,
