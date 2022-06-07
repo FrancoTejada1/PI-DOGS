@@ -24,32 +24,64 @@ const validation = (race) => {
     errors.heightMin = "Height Min is required with the format";
   } else if (!regexHeightMin.test(race.heightMin.trim())) {
     errors.heightMin = "Height only accepts integers and positive numbers";
+  } else if (parseInt(race.heightMin.trim()) < 1) {
+    errors.heightMin = "the number must be greater than or equal to 1";
+  } else if (parseInt(race.heightMin.trim()) >= parseInt(race.heightMax.trim())) {
+    errors.heightMin = "the minimum value of the height must be less than the maximum";
   }
 
   if (!race.heightMax.trim()) {
     errors.heightMax = "Height Max is required with the format";
   } else if (!regexHeightMax.test(race.heightMax.trim())) {
     errors.heightMax = "Height only accepts integers and positive numbers";
+  } else if (parseInt(race.heightMax.trim()) > 100) {
+    errors.heightMax = "The number must be less than or equal to 100";
+  } else if (parseInt(race.heightMax.trim()) <= parseInt(race.heightMin.trim())) {
+    errors.heightMax = "the maximum value of the height must be greater than the minimum";
   }
 
   if (!race.weightMin.trim()) {
     errors.weightMin = "Weight Min is required with the format";
   } else if (!regexWeightMin.test(race.weightMin.trim())) {
     errors.weightMin = "Weight only accepts integers and positive numbers";
+  } else if (parseInt(race.weightMin.trim()) < 1) {
+    errors.weightMin = "the number must be greater than or equal to 1";
+  } else if (parseInt(race.weightMin.trim()) >= parseInt(race.weightMax.trim())) {
+    errors.weightMin = "the minimum value of the weight must be less than the maximum";
   }
 
   if (!race.weightMax.trim()) {
     errors.weightMax = "Weight Max is required with the format";
   } else if (!regexWeightMax.test(race.weightMax.trim())) {
     errors.weightMax = "Weight only accepts integers and positive numbers";
+  } else if (parseInt(race.weightMax.trim()) > 82) {
+    errors.weightMax = "The number must be less than or equal to 82";
+  } else if (parseInt(race.weightMax.trim()) <= parseInt(race.weightMin.trim())) {
+    errors.weightMax = "the maximum value of the weight must be greater than the minimum";
   }
 
-  if (!regexYearsMin.test(race.yearsOfLifeMin.trim())) {
-    errors.yearsOfLifeMin = "Only accepts positive integers and must be greater than 1";
+  if (!race.yearsOfLifeMin.trim()) {
+    errors.yearsOfLifeMin = "Year Min is required";
+  } else if (!regexYearsMin.test(race.yearsOfLifeMin.trim())) {
+    errors.yearsOfLifeMin = "Only accepts positive integers";
+  } else if (parseInt(race.yearsOfLifeMin.trim()) < 1) {
+    errors.yearsOfLifeMin = "the number must be greater than or equal to 1";
+  } else if (parseInt(race.yearsOfLifeMin.trim()) >= parseInt(race.yearsOfLifeMax.trim())) {
+    errors.yearsOfLifeMin = "the minimum value of the age must be less than the maximum";
   }
 
-  if (!regexYearsMax.test(race.yearsOfLifeMax.trim())) {
-    errors.yearsOfLifeMax = "Only accepts positive integers and must be less than 18";
+  if (!race.yearsOfLifeMax.trim()) {
+    errors.yearsOfLifeMax = "Year Max is required";
+  } else if (!regexYearsMax.test(race.yearsOfLifeMax.trim())) {
+    errors.yearsOfLifeMax = "Only accepts positive integers";
+  } else if (parseInt(race.yearsOfLifeMax.trim()) > 18) {
+    errors.yearsOfLifeMax = "The number must be less than or equal to 18";
+  } else if (parseInt(race.yearsOfLifeMax.trim()) <= parseInt(race.yearsOfLifeMin.trim())) {
+    errors.yearsOfLifeMax ="the maximun value of the age must be greater than the minimum";
+  }
+
+  if(!race.temperaments.length) {
+    errors.temperaments = "minimal temperament is needed"
   }
 
   return errors;
@@ -85,32 +117,48 @@ export default function CreatePage() {
       ...race,
       [e.target.name]: e.target.value,
     });
+    setErrors(validation({
+      ...race,
+      [e.target.name]: e.target.value
+    }))
   };
 
   const handleSelect = (e) => {
     // para que detecte cuando seleccionamos y haga el cambio de valores
     setRaces({
       ...race,
-      temperaments: [...race.temperaments, e.target.value],
+      temperaments: [ ...race.temperaments,e.target.value],
     });
   };
 
   const handleBlur = (e) => {
     // aqui es donde se haran las validaciones y este mismo las lance
     handleChange(e);
+    handleSelect(e);
     setErrors(validation(race)); // la funcion validation va a funcionar dentro de la variable de estado de los errores y validara las variables del formulario
+  };
+
+  const handleDelete = (e) => {
+    setRaces({
+      ...race,
+      temperaments: race.temperaments.reduce((acc, item) => {
+        if (!acc.includes(item)) {
+          acc.push(item);
+        }
+        return acc;
+      },[])
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setResponse(true)
     console.log(race);
     if (Object.keys(errors).length !== 0) {
       alert("Complete the required fields");
     } else if (response === false) {
       alert("You have to complete the form");
     } else {
-      setResponse(true);
       dispatch(postRaces(race));
       alert("successfully created race");
       setRaces({
@@ -163,7 +211,9 @@ export default function CreatePage() {
                 onBlur={(e) => handleBlur(e)}
                 onChange={(e) => handleChange(e)}
               />
-              {errors.heightMin && <p className={style.errors}>{errors.heightMin}</p>}
+              {errors.heightMin && (
+                <p className={style.errors}>{errors.heightMin}</p>
+              )}
             </p>
             <p>
               <label className={style.label}>Height Max: </label>
@@ -176,7 +226,9 @@ export default function CreatePage() {
                 onBlur={(e) => handleBlur(e)}
                 onChange={(e) => handleChange(e)}
               />
-              {errors.heightMax && <p className={style.errors}>{errors.heightMax}</p>}
+              {errors.heightMax && (
+                <p className={style.errors}>{errors.heightMax}</p>
+              )}
             </p>
             <p>
               <label className={style.label}>Weight Min: </label>
@@ -189,7 +241,9 @@ export default function CreatePage() {
                 onBlur={(e) => handleBlur(e)}
                 onChange={(e) => handleChange(e)}
               />
-              {errors.weightMin && <p className={style.errors}>{errors.weightMin}</p>}
+              {errors.weightMin && (
+                <p className={style.errors}>{errors.weightMin}</p>
+              )}
             </p>
             <p>
               <label className={style.label}>Weight Max: </label>
@@ -202,7 +256,9 @@ export default function CreatePage() {
                 onBlur={(e) => handleBlur(e)}
                 onChange={(e) => handleChange(e)}
               />
-              {errors.weightMax && <p className={style.errors}>{errors.weightMax}</p>}
+              {errors.weightMax && (
+                <p className={style.errors}>{errors.weightMax}</p>
+              )}
             </p>
             <p>
               <label className={style.label}>Years of Life Min: </label>
@@ -238,16 +294,22 @@ export default function CreatePage() {
               <label className={style.label}>Temperaments: </label>
               <select
                 className={style.select}
+                onBlur={(e) => handleBlur(e)}
                 onChange={(e) => handleSelect(e)}
               >
                 {temperaments?.map((t, i) => {
                   return <option key={i}>{t.name}</option>;
                 })}
               </select>
+              {errors.temperaments && <p className={style.errors}>{errors.temperaments}</p>}
             </p>
-            <p className={style.temps_concats}>
-              {race.temperaments?.map((d) => `${d}, `)}
-            </p>
+
+            {race.temperaments?.map((d) => (
+              <div className={style.temps_concats}>
+                <p>{d}</p>
+                <button onClick={() => handleDelete(d)}>x</button>
+              </div>
+            ))}
             <p className={style.boton}>
               <button className={style.bt_create} type="submit">
                 Create

@@ -9,6 +9,7 @@ export const FILTER_BY_TEMPERAMENTS = "FILTER_BY_TEMPERAMENTS";
 export const FILTER_BY_UPLOADED = "FILTER_BY_UPLOADED";
 export const SORT_BY_NAME = "SORT_BY_NAME";
 export const SORT_BY_WEIGHT = "SORT_BY_WEIGHT";
+export const SORT_BY_HEIGHT = "SORT_BY_HEIGHT";
 
 
 export function getAllRaces() {
@@ -112,3 +113,10 @@ export function sortByWeight(payload) {
     payload: payload
   }
 };
+
+export function sortByHeight(payload) {
+  return {
+    type: SORT_BY_HEIGHT,
+    payload: payload
+  }
+}

@@ -57,6 +57,11 @@ html {
   right: 143px;
 }
 
+label {
+  font-family: 'Kanit', sans-serif;
+    margin: 6px;
+}
+
 .select {
   padding: 5px 3px;
   font-family: "Kanit", sans-serif;

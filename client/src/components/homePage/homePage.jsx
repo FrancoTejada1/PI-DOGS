@@ -8,6 +8,7 @@ import {
   filterByUploaded,
   sortByName,
   sortByWeight,
+  sortByHeight
 } from "../../redux/actions/index.js";
 import Cards from "../cards/cards.jsx";
 import Pagination from "../pagination/pagination.jsx";
@@ -18,7 +19,7 @@ export default function HomePage() {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1); // pagina en la que se establece
-  const [dogs] = useState(8); // 8 perros que se veran en la pagina
+  const [dogs, setDogs] = useState(8); // 8 perros que se veran en la pagina
   const [order, setOrder] = useState("");
 
   const races = useSelector((state) => state.races);
@@ -39,12 +40,12 @@ export default function HomePage() {
 
   const handlerFilterByTemps = (e) => {
     dispatch(filterByTemperaments(e.target.value));
-    setPage(1)
+    setPage(1);
   };
 
   const handlerFilterByUploaded = (e) => {
     dispatch(filterByUploaded(e.target.value));
-    setPage(1)
+    setPage(1);
   };
 
   const handlerSortByName = (e) => {
@@ -52,16 +53,26 @@ export default function HomePage() {
     dispatch(sortByName(e.target.value));
     setPage(1);
     setOrder(e.target.value);
+    if(e.target.value === "All") setOrder("");
   };
 
   const handlerSortByWeight = (e) => {
     e.preventDefault();
     dispatch(sortByWeight(e.target.value));
     setPage(1);
-    setOrder(e.target.value);
+    setOrder(`Ordenado ${e.target.value}`);
+    if(e.target.value === "All") setOrder("");
   };
 
-  console.log(temperaments);
+  const handlerSortByHeight = (e) => {
+    e.preventDefault();
+    dispatch(sortByHeight(e.target.value));
+    setPage(1);
+    setOrder(e.target.value)
+    if(e.target.value === "All") setOrder("");
+  }
+
+  console.log(dogsByPages.map(d => d.weight));
 
   return (
     <div className={style.bg_home}>
@@ -73,7 +84,7 @@ export default function HomePage() {
       </div>
       <div className={style.header}>
         <select className={style.select} onChange={(e) => handlerFilterByTemps(e)}>
-          <option value="All">All</option>
+          <option value="All">Temperaments</option>
           {temperaments.map((d, i) => (
             <option key={i} value={d.name}>
               {d.name}
@@ -86,12 +97,20 @@ export default function HomePage() {
           <option value="Api">Api</option>
         </select>
         <select className={style.select} onChange={(e) => handlerSortByName(e)}>
+          <option value="All">Names</option>
           <option value="Ascendent">Ascendent</option>
           <option value="Descendent">Descendent</option>
         </select>
+        
         <select className={style.select} onChange={(e) => handlerSortByWeight(e)}>
-          <option value="maxWeight">Max Weight</option>
-          <option value="minWeight">Min Weight</option>
+          <option value="All">Weight</option>
+          <option value="Ascendent">Ascendent</option>
+          <option value="Descendent">Descendent</option>
+        </select>
+        <select className={style.select} onChange={(e) => handlerSortByHeight(e)}>
+          <option value="All">Height</option>
+          <option value="Ascendent">Ascendent</option>
+          <option value="Descendent">Descendent</option>
         </select>
       </div>
       <Pagination dogs={dogs} races={races.length} pagination={pagination} />
@@ -105,6 +124,7 @@ export default function HomePage() {
               img={r.img}
               name={r.name}
               weight={r.weight}
+              height={r.height}
               temperaments={r.temperaments}
             />
           );

@@ -111,4 +111,18 @@ router.post("/", async (req, res) => {
 
 });
 
+router.delete("/", (req, res) => {
+  const {id} = req.params;
+
+  Race.destroy({
+    where: {
+      id: id
+    }
+  })
+
+  .then((eliminar) => {
+    res.send(eliminar)
+  })
+})
+
 module.exports = router;

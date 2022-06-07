@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./cards.module.css";
 
-export default function Cards({ id, img, name, temperaments, weight }) {
+export default function Cards({ id, img, name, temperaments, weight,height }) {
   var key = 1;
 
   return (
@@ -21,7 +21,8 @@ export default function Cards({ id, img, name, temperaments, weight }) {
                   : temperaments
                 : null}
             </p>
-            <h4 className={style.weight}>weight: {weight}</h4>
+            <h4 className={style.weight}>weight: {/* weight === "NaN" || weight === null ? weight === 0 :  */weight}</h4>
+            <h4 className={style.weight}>height: {height}</h4>
           </div>
         </Link>
       </div>

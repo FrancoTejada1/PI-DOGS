@@ -14,7 +14,7 @@ export default function DetailsPage() {
     dispatch(raceById(id));
   }, [dispatch, id]);
 
-  console.log(allDetails)
+  console.log(allDetails);
 
   return (
     <div className={style.bg_details}>
@@ -31,18 +31,20 @@ export default function DetailsPage() {
               <img className={style.img_holder} src={allDetails.img} alt="" />
               <div className={style.info}>
                 <h1 className={style.title}>{allDetails.name}</h1>
-                <ul>
-                  <li>
+                <h2>
                   {allDetails.temperaments
                     ? typeof allDetails.temperaments !== "string"
-                      ? allDetails.temperaments.map((d) => d.name).length > 1 ? allDetails.temperaments.map((d) => `${d.name}, `) : allDetails.temperaments.map((d) => d.name)
+                      ? allDetails.temperaments.map((d) => d.name).length > 1
+                        ? allDetails.temperaments.map((d) => `${d.name}, `)
+                        : allDetails.temperaments.map((d) => d.name)
                       : allDetails.temperaments
                     : null}
-                  </li>
-                </ul>
+                </h2>
                 <h3 className={style.height}>Height: {allDetails.height} cm</h3>
                 <h3 className={style.weight}>Weight: {allDetails.weight} kg</h3>
-                <h3 className={style.years}>Years of Life: {allDetails.yearsOfLife}</h3>
+                <h3 className={style.years}>
+                  Years of Life: {allDetails.yearsOfLife}
+                </h3>
               </div>
             </div>
           ) : (
@@ -51,7 +53,9 @@ export default function DetailsPage() {
               <h2>
                 {allDetails.temperaments
                   ? typeof allDetails.temperaments !== "string"
-                    ? allDetails.temperaments.map((d) => d.name).length > 1 ? allDetails.temperaments.map((d) => `${d.name}, `) : allDetails.temperaments.map((d) => d.name)
+                    ? allDetails.temperaments.map((d) => d.name).length > 1
+                      ? allDetails.temperaments.map((d) => `${d.name}, `)
+                      : allDetails.temperaments.map((d) => d.name)
                     : allDetails.temperaments
                   : null}
               </h2>
