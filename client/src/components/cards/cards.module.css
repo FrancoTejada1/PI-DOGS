@@ -7,7 +7,7 @@
 }
 
 .card {
-  background: gray;
+  background: #0e09099e;
   height: 100%;
   position: relative;
   text-align: center;
@@ -35,7 +35,7 @@
   position: relative;
   font-family: "Kanit", sans-serif;
   font-size: 20px;
-  color: black;
+  color: white;
   text-align: left;
   padding: 5px 17px 10px;
   margin: 0;
@@ -48,8 +48,7 @@
   border: none;
   font-family: "Kanit", sans-serif;
   font-weight: bold;
-  color: #006d77;
-  background: #ffffff4a;
+  color: #28965A;
   flex-flow: column wrap;
   justify-content: space-evenly;
 }

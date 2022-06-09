@@ -2,6 +2,7 @@ const { Router } = require("express");
 const axios = require("axios");
 const { YOUR_API_KEY } = process.env;
 const { Race, Temperaments } = require("../db.js");
+const { Op } = require("sequelize");
 
 const router = Router();
 
@@ -68,23 +69,33 @@ router.get("/:id", async (req, res) => {
   const races = await getAllInfo();
 
   try {
-    if(id){
+    if (id) {
       const findById = races.filter((r) => r.id == id);
 
       findById.length
-      ? res.status(200).send(findById)
-      : res.status(400).send("el id no se encontro")
-    }
-    else {
-      null
+        ? res.status(200).send(findById)
+        : res.status(400).send("el id no se encontro");
+    } else {
+      null;
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
 
 router.post("/", async (req, res) => {
-  const {id, name, heightMin, heightMax, weightMin, weightMax, yearsOfLifeMin, yearsOfLifeMax, createdInDB, temperaments} = req.body;
+  const {
+    id,
+    name,
+    heightMin,
+    heightMax,
+    weightMin,
+    weightMax,
+    yearsOfLifeMin,
+    yearsOfLifeMax,
+    createdInDB,
+    temperaments,
+  } = req.body;
 
   let height = `${heightMin} - ${heightMax}`;
   let weight = `${weightMin} - ${weightMax}`;
@@ -96,33 +107,72 @@ router.post("/", async (req, res) => {
     height,
     weight,
     yearsOfLife,
-    createdInDB
-  })
+    createdInDB,
+  });
 
   const addTemps = await Temperaments.findAll({
     where: {
-      name: temperaments
-    }
-  })
+      name: temperaments,
+    },
+  });
 
   newRace.addTemperaments(addTemps);
 
   res.status(200).send("successfully created race");
-
 });
 
-router.delete("/", (req, res) => {
-  const {id} = req.params;
-
-  Race.destroy({
-    where: {
-      id: id
-    }
-  })
-
-  .then((eliminar) => {
-    res.send(eliminar)
-  })
-})
-
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* router.delete("/destroy/:id", async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    await Race.destroy({
+    where: {
+      id: id,
+    },
+  })
+  res.status(200).send("se elimino")
+  } catch (error) {
+    console.log(error)
+  } 
+}); */

@@ -8,7 +8,7 @@ import {
   filterByUploaded,
   sortByName,
   sortByWeight,
-  sortByHeight
+  mayorDB
 } from "../../redux/actions/index.js";
 import Cards from "../cards/cards.jsx";
 import Pagination from "../pagination/pagination.jsx";
@@ -60,23 +60,21 @@ export default function HomePage() {
     e.preventDefault();
     dispatch(sortByWeight(e.target.value));
     setPage(1);
-    setOrder(`Ordenado ${e.target.value}`);
+    setOrder(e.target.value);
     if(e.target.value === "All") setOrder("");
   };
 
-  const handlerSortByHeight = (e) => {
+/*   const boton = (e) => {
     e.preventDefault();
-    dispatch(sortByHeight(e.target.value));
-    setPage(1);
-    setOrder(e.target.value)
-    if(e.target.value === "All") setOrder("");
-  }
+    dispatch(mayorDB())
+  } */
 
-  console.log(dogsByPages.map(d => d.weight));
+  console.log(dogsByPages);
 
   return (
     <div className={style.bg_home}>
       <SearchBar />
+      {/* <button onClick={(e) => boton(e)}>mayor weight DB</button> */}
       <div className={style.container_boton}>
         <Link to="/create">
           <button className={style.button_go_create}>Create Race</button>
@@ -100,15 +98,9 @@ export default function HomePage() {
           <option value="All">Names</option>
           <option value="Ascendent">Ascendent</option>
           <option value="Descendent">Descendent</option>
-        </select>
-        
+        </select>    
         <select className={style.select} onChange={(e) => handlerSortByWeight(e)}>
           <option value="All">Weight</option>
-          <option value="Ascendent">Ascendent</option>
-          <option value="Descendent">Descendent</option>
-        </select>
-        <select className={style.select} onChange={(e) => handlerSortByHeight(e)}>
-          <option value="All">Height</option>
           <option value="Ascendent">Ascendent</option>
           <option value="Descendent">Descendent</option>
         </select>
@@ -124,7 +116,6 @@ export default function HomePage() {
               img={r.img}
               name={r.name}
               weight={r.weight}
-              height={r.height}
               temperaments={r.temperaments}
             />
           );

@@ -117,24 +117,19 @@ export default function CreatePage() {
       ...race,
       [e.target.name]: e.target.value,
     });
-    setErrors(validation({
-      ...race,
-      [e.target.name]: e.target.value
-    }))
   };
 
   const handleSelect = (e) => {
     // para que detecte cuando seleccionamos y haga el cambio de valores
     setRaces({
       ...race,
-      temperaments: [ ...race.temperaments,e.target.value],
+      temperaments: [...race.temperaments,e.target.value],
     });
   };
 
   const handleBlur = (e) => {
     // aqui es donde se haran las validaciones y este mismo las lance
     handleChange(e);
-    handleSelect(e);
     setErrors(validation(race)); // la funcion validation va a funcionar dentro de la variable de estado de los errores y validara las variables del formulario
   };
 
@@ -152,6 +147,7 @@ export default function CreatePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors(validation(race));
     setResponse(true)
     console.log(race);
     if (Object.keys(errors).length !== 0) {
@@ -159,6 +155,7 @@ export default function CreatePage() {
     } else if (response === false) {
       alert("You have to complete the form");
     } else {
+      setResponse(true)
       dispatch(postRaces(race));
       alert("successfully created race");
       setRaces({
@@ -174,6 +171,8 @@ export default function CreatePage() {
       navigate("/dogs");
     }
   };
+
+  console.log(temperaments)
 
   return (
     <div className={style.bg_create}>
@@ -303,18 +302,18 @@ export default function CreatePage() {
               </select>
               {errors.temperaments && <p className={style.errors}>{errors.temperaments}</p>}
             </p>
-
-            {race.temperaments?.map((d) => (
-              <div className={style.temps_concats}>
-                <p>{d}</p>
-                <button onClick={() => handleDelete(d)}>x</button>
-              </div>
-            ))}
-            <p className={style.boton}>
+            
+            {race.temperaments?.map((d, i) => 
+            <div className={style.temps_concats}>
+              <p>{d}</p>
+            <button onClick={(e) => handleDelete(e)}>x</button>
+            </div>
+            )}
+            <div className={style.boton}>
               <button className={style.bt_create} type="submit">
                 Create
               </button>
-            </p>
+            </div>
           </form>
         </div>
       </div>

@@ -10,6 +10,7 @@ export const FILTER_BY_UPLOADED = "FILTER_BY_UPLOADED";
 export const SORT_BY_NAME = "SORT_BY_NAME";
 export const SORT_BY_WEIGHT = "SORT_BY_WEIGHT";
 export const SORT_BY_HEIGHT = "SORT_BY_HEIGHT";
+export const MAYOR_WEIGHT_DB = "MAYOR_WEIGHT_DB";
 
 
 export function getAllRaces() {
@@ -119,4 +120,17 @@ export function sortByHeight(payload) {
     type: SORT_BY_HEIGHT,
     payload: payload
   }
-}
+};
+
+/* export function mayorDB(payload) {
+  return {
+    type: MAYOR_WEIGHT_DB,
+    payload: payload
+  }
+} */
+
+/* export function destroyRace(id) {
+  return function(dispatch) {
+    axios.get(`http:`)
+  }
+} */

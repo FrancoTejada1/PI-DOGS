@@ -8,7 +8,7 @@ import {
   FILTER_BY_UPLOADED,
   SORT_BY_NAME,
   SORT_BY_WEIGHT,
-  SORT_BY_HEIGHT
+  MAYOR_WEIGHT_DB,
 } from "../actions/index.js";
 
 const initialState = {
@@ -98,25 +98,41 @@ const rootReducer = (state = initialState, action) => {
       };
     case SORT_BY_WEIGHT:
       var data = state.copyOfRaces;
-      data = data.filter((d) => d.weight !== "NaN");
+      data = data.filter((d) => d.weight.split("-")[0] !== "NaN");
       const sortWeight = action.payload === "Ascendent"
         ? data.sort((a, b) => {
-            if (parseInt(a.weight.split("-"), 10) > parseInt(b.weight.split("-"), 10)){
+            if (parseInt(a.weight.split("-")[0], 10) > parseInt(b.weight.split("-")[0], 10)){
               return 1;
             }
-            else if (parseInt(a.weight.split("-"), 10) < parseInt(b.weight.split("-"), 10)){
+            else if (parseInt(a.weight.split("-")[0], 10) < parseInt(b.weight.split("-")[0], 10)){
               return -1;
+            }
+            else if(parseInt(a.weight.split("-")[0], 10) === parseInt(b.weight.split("-")[0], 10)){
+              if(parseInt(a.weight.split("-")[1], 10) > parseInt(b.weight.split("-")[1], 10)) {
+                return 1
+              } 
+              else if(parseInt(a.weight.split("-")[1], 10) < parseInt(b.weight.split("-")[1], 10)) {
+                return -1
+              }
             }
             else {
               return 0;
             }
           })
         : data.sort((a, b) => {
-            if (parseInt(a.weight.split("-"), 10) > parseInt(b.weight.split("-"), 10)){
+            if (parseInt(a.weight.split("-")[0], 10) > parseInt(b.weight.split("-")[0], 10)){
               return -1;
             }
-            else if (parseInt(a.weight.split("-"), 10) < parseInt(b.weight.split("-"), 10)){
+            else if (parseInt(a.weight.split("-")[0], 10) < parseInt(b.weight.split("-")[0], 10)){
               return 1;
+            }
+            else if(parseInt(a.weight.split("-")[0], 10) === parseInt(b.weight.split("-")[0], 10)){
+              if(parseInt(a.weight.split("-")[1], 10) > parseInt(b.weight.split("-")[1], 10)) {
+                return -1
+              } 
+              else if(parseInt(a.weight.split("-")[1], 10) < parseInt(b.weight.split("-")[1], 10)) {
+                return 1
+              }
             }
             else {
               return 0;
@@ -126,31 +142,38 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         races: sortWeight,
       };
-    case SORT_BY_HEIGHT: 
-    const data2 = state.copyOfRaces;
-    const sortHeight = action.payload === "Ascendent"
-     ? data2.sort((a, b) => {
-       if(parseInt(a.height.split("-"),10) > parseInt(b.height.split("-"), 10)){
-         return 1
-       }
-       else if(parseInt(a.height.split("-"), 10) < parseInt(b.height.split("-"), 10)){
-         return -1
-       }
-       else return 0
-       })
-     : data2.sort((a, b) => {
-       if(parseInt(a.height.split("-"), 10) > parseInt(b.height.split("-"), 10)){
-         return -1
-       }
-       else if(parseInt(a.height.split("-"), 10) < parseInt(b.height.split("-"), 10)){
-         return 1
-       }
-       else return 0
-     })
-     return {
-       ...state,
-       races: sortHeight
-     }
+/*     case MAYOR_WEIGHT_DB:
+      let data2 = state.copyOfRaces;
+      data2 = data2.filter((d) => typeof d.id === "string")
+      data2.sort((a, b) => {
+        if (parseInt(a.weight.split("-")[0], 10) > parseInt(b.weight.split("-")[0], 10)){
+          return -1;
+        }
+        else if (parseInt(a.weight.split("-")[0], 10) < parseInt(b.weight.split("-")[0], 10)){
+          return 1;
+        }
+        else if(parseInt(a.weight.split("-")[0], 10) === parseInt(b.weight.split("-")[0], 10)){
+          if(parseInt(a.weight.split("-")[1], 10) > parseInt(b.weight.split("-")[1], 10)) {
+            return -1
+          } 
+          else if(parseInt(a.weight.split("-")[1], 10) < parseInt(b.weight.split("-")[1], 10)) {
+            return 1
+          }
+        }
+        else {
+          return 0;
+        }
+        
+      });
+      let data3 = [];
+      for( {
+        data3.push(data2[i])
+      }
+      console.log(data3)
+    return {
+      ...state,
+      races: data3
+    }   */
     default:
       return state;
   }
