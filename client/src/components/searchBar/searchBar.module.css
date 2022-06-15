@@ -10,7 +10,7 @@
 .search {
   padding: 0 0 0 25px;
   font-size: 17px;
-  width: 25%;
+  width: max-content;
   height: 100%;
   border-radius: 20px 0 0 20px;
   background: rgba(0, 0, 0, 0.7);
@@ -27,8 +27,8 @@
   border: none;
   border-radius: 0 20px 20px 0;
   padding: 8px 20px;
-  width: 8%;
-  height: 100%;
+  width: max-content;
+  height: max-content;
   background: #daa5208f;
   color: black;
   font-weight: bolder;

@@ -95,6 +95,7 @@ export default function CreatePage() {
 
   const [race, setRaces] = useState({
     name: "",
+    img: "",
     heightMin: "",
     heightMax: "",
     weightMin: "",
@@ -160,6 +161,7 @@ export default function CreatePage() {
       alert("successfully created race");
       setRaces({
         name: "",
+        img: "",
         heightMin: "",
         heightMax: "",
         weightMin: "",
@@ -183,7 +185,6 @@ export default function CreatePage() {
         <div>
           <h1 className={style.title_create}>Create your Race</h1>
         </div>
-
         <div className={style.form}>
           <form onSubmit={(e) => handleSubmit(e)}>
             <p>
@@ -198,6 +199,17 @@ export default function CreatePage() {
                 onChange={(e) => handleChange(e)}
               />
               {errors.name && <p className={style.errors}>{errors.name}</p>}
+            </p>
+            <p>
+              <label className={style.label}>Image: </label>
+              <input
+                className={style.input}
+                type="text"
+                name="img"
+                value={race.img}
+                placeholder="Image of race..."
+                onChange={(e) => handleChange(e)}
+              />
             </p>
             <p>
               <label className={style.label}>Height Min: </label>

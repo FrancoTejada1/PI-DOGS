@@ -12,7 +12,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
   width: 100%;
 }
@@ -26,8 +26,16 @@ body {
 
 .a_back_details {
   text-decoration: none;
-  height: 5%;
-  width: 5%;
+  height: max-content;
+  width: max-content;
+  margin: 10px 20px;
+}
+
+.delete_details {
+  position: relative;
+  left: 83%;
+  height: max-content;
+  width: max-content;
   margin: 10px 20px;
 }
 
@@ -36,11 +44,25 @@ body {
   height: 100%;
   cursor: pointer;
   border: none;
-  background: white;
-  color: black;
+  background: rgba(0, 0, 0, 0.85);
+  color: silver;
   font-size: larger;
   border-radius: 20px;
-  padding: 2px;
+  padding: 3px 10px;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
+
+.boton_delete {
+  width: max-content;
+  height: max-content;
+  cursor: pointer;
+  border: none;
+  background: rgba(0, 0, 0, 0.85);
+  color: silver;
+  font-size: larger;
+  border-radius: 20px;
+  padding: 3px 10px;
   font-family: "Kanit", sans-serif;
   font-weight: bold;
 }
@@ -48,10 +70,11 @@ body {
 .with_img {
   width: 100%;
   height: 100%;
-  display: flex;
+  display: grid;
   align-content: center;
   flex-flow: row wrap;
   align-items: center;
+  grid-template-columns: 1fr 1fr;
 }
 
 .without_img {
@@ -59,10 +82,11 @@ body {
   height: max-content;
   display: inline-flex;
   flex-flow: column wrap;
-  align-content: center;
+  align-content: space-evenly;
+  justify-content: space-evenly;
   position: relative;
   top: 15%;
-  right: 4%;
+  right: 8%;
   text-align: center;
   background: #00000073;
   padding: 10px 47px;
@@ -77,9 +101,9 @@ body {
   align-content: center;
   position: relative;
   top: 0%;
-  right: 5%;
-  width: 45%;
-  height: 60%;
+  right: 29%;
+  width: 100%;
+  height: 100%;
   margin: 10px;
   border-radius: 20px;
 }
@@ -89,14 +113,17 @@ body {
   flex-flow: column wrap;
   position: relative;
   top: 0%;
-  right: 0;
+  right: 15%;
   text-align: center;
   background: #00000073;
-  padding: 10px 47px;
+  padding: 0 15px;
   color: white;
   border-radius: 20px;
   font-family: "Kanit", sans-serif;
-  width: 40%;
+  width: 100%;
+  height: 100%;
+  align-content: space-evenly;
+  justify-content: space-evenly;
 }
 
 .loading {

@@ -87,6 +87,7 @@ router.post("/", async (req, res) => {
   const {
     id,
     name,
+    image,
     heightMin,
     heightMax,
     weightMin,
@@ -104,6 +105,7 @@ router.post("/", async (req, res) => {
   const newRace = await Race.create({
     id,
     name,
+    image,
     height,
     weight,
     yearsOfLife,
@@ -121,48 +123,7 @@ router.post("/", async (req, res) => {
   res.status(200).send("successfully created race");
 });
 
-module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* router.delete("/destroy/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   
   try {
@@ -175,4 +136,6 @@ module.exports = router;
   } catch (error) {
     console.log(error)
   } 
-}); */
+});
+
+module.exports = router;

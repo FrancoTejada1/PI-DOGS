@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
-import { raceById } from "../../redux/actions";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { raceById, deleteRace } from "../../redux/actions";
 import style from "./detailsPage.module.css";
 
 export default function DetailsPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const allDetails = useSelector((state) => state.details);
 
@@ -14,18 +15,32 @@ export default function DetailsPage() {
     dispatch(raceById(id));
   }, [dispatch, id]);
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+    if(id.length > 3){
+      dispatch(deleteRace(id))
+      alert("race was removed successfully")
+      navigate("/dogs")
+    }
+    else {
+      alert("you can not delete this race")
+    }
+  }
+
   console.log(allDetails);
 
   return (
     <div className={style.bg_details}>
-      {allDetails &&
-      (typeof allDetails.id === "number"
-        ? allDetails.id === Number(id)
-        : allDetails.id === id) ? (
+      {allDetails && (typeof allDetails.id === "number" ? allDetails.id === Number(id) : allDetails.id === id) ? 
         <div className={style.details}>
           <Link className={style.a_back_details} to="/dogs">
             <button className={style.boton}>Back</button>
           </Link>
+          {allDetails.id === id 
+          ? <div className={style.delete_details}>
+              <button className={style.boton_delete} onClick={(e) => handleDelete(e)}>Delete Race</button>
+            </div>
+          : null}
           {allDetails.img ? (
             <div className={style.with_img}>
               <img className={style.img_holder} src={allDetails.img} alt="" />
@@ -65,13 +80,8 @@ export default function DetailsPage() {
             </div>
           )}
         </div>
-      ) : (
-        <img
-          className={style.loading}
-          src="https://c.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif"
-          alt=" "
-        />
-      )}
+      : <img className={style.loading} src="https://c.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif" alt=" "/>
+      }
     </div>
   );
 }

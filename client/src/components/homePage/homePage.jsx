@@ -8,7 +8,6 @@ import {
   filterByUploaded,
   sortByName,
   sortByWeight,
-  mayorDB
 } from "../../redux/actions/index.js";
 import Cards from "../cards/cards.jsx";
 import Pagination from "../pagination/pagination.jsx";
@@ -64,17 +63,11 @@ export default function HomePage() {
     if(e.target.value === "All") setOrder("");
   };
 
-/*   const boton = (e) => {
-    e.preventDefault();
-    dispatch(mayorDB())
-  } */
-
   console.log(dogsByPages);
 
   return (
     <div className={style.bg_home}>
-      <SearchBar />
-      {/* <button onClick={(e) => boton(e)}>mayor weight DB</button> */}
+      <SearchBar setPage={setPage}/>
       <div className={style.container_boton}>
         <Link to="/create">
           <button className={style.button_go_create}>Create Race</button>

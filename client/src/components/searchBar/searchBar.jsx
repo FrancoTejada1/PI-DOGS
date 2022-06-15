@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { raceByName } from "../../redux/actions/index.js";
 import style from "./searchBar.module.css";
 
-export default function SearchBar() {
+export default function SearchBar({setPage}) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -17,6 +17,7 @@ export default function SearchBar() {
   const handlerSubmit = (e) => {
       e.preventDefault();
       dispatch(raceByName(name));
+      setPage(1)
   }
 
   return (

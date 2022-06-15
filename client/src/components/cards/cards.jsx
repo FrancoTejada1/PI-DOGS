@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./cards.module.css";
 
-export default function Cards({ id, img, name, temperaments, weight, origin }) {
+export default function Cards({ id, img, name, temperaments, weight }) {
   var key = 1;
 
   return (

@@ -8,7 +8,7 @@ import {
   FILTER_BY_UPLOADED,
   SORT_BY_NAME,
   SORT_BY_WEIGHT,
-  MAYOR_WEIGHT_DB,
+  DELETE_RACE
 } from "../actions/index.js";
 
 const initialState = {
@@ -72,34 +72,33 @@ const rootReducer = (state = initialState, action) => {
         races: action.payload === "All" ? allRaces : racesUploaded,
       };
     case SORT_BY_NAME:
-      const sortName =
-        action.payload === "Ascendent"
-          ? state.copyOfRaces.sort((a, b) => {
-              if (a.name > b.name) {
-                return 1;
-              } else if (a.name < b.name) {
-                return -1;
-              } else {
-                return 0;
-              }
-            })
-          : state.copyOfRaces.sort((a, b) => {
-              if (a.name > b.name) {
-                return -1;
-              } else if (a.name < b.name) {
-                return 1;
-              } else {
-                return 0;
-              }
-            });
+      const sortName = action.payload === "Ascendent"
+      ? state.races.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        } else if (a.name < b.name) {
+            return -1;
+          } else {
+              return 0;
+            }
+      })
+      : state.races.sort((a, b) => {
+        if (a.name > b.name) {
+          return -1;
+        } else if (a.name < b.name) {
+            return 1;
+          } else {
+              return 0;
+            }
+      });
       return {
         ...state,
-        races: sortName,
+        copyOfRaces: sortName,
       };
     case SORT_BY_WEIGHT:
-      var data = state.copyOfRaces;
+      let data = state.races;
       data = data.filter((d) => d.weight.split("-")[0] !== "NaN");
-      const sortWeight = action.payload === "Ascendent"
+      let sortWeight = action.payload === "Ascendent"
         ? data.sort((a, b) => {
             if (parseInt(a.weight.split("-")[0], 10) > parseInt(b.weight.split("-")[0], 10)){
               return 1;
@@ -141,39 +140,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         races: sortWeight,
+        copyOfRaces: sortWeight,
       };
-/*     case MAYOR_WEIGHT_DB:
-      let data2 = state.copyOfRaces;
-      data2 = data2.filter((d) => typeof d.id === "string")
-      data2.sort((a, b) => {
-        if (parseInt(a.weight.split("-")[0], 10) > parseInt(b.weight.split("-")[0], 10)){
-          return -1;
-        }
-        else if (parseInt(a.weight.split("-")[0], 10) < parseInt(b.weight.split("-")[0], 10)){
-          return 1;
-        }
-        else if(parseInt(a.weight.split("-")[0], 10) === parseInt(b.weight.split("-")[0], 10)){
-          if(parseInt(a.weight.split("-")[1], 10) > parseInt(b.weight.split("-")[1], 10)) {
-            return -1
-          } 
-          else if(parseInt(a.weight.split("-")[1], 10) < parseInt(b.weight.split("-")[1], 10)) {
-            return 1
-          }
-        }
-        else {
-          return 0;
-        }
-        
-      });
-      let data3 = [];
-      for( {
-        data3.push(data2[i])
-      }
-      console.log(data3)
+    case DELETE_RACE:
+      let data3 = state.races;
+      let deleteById = [];
+      let id = action.payload
+      ? deleteById = data3.filter((d) => d.id !== id) : null;
     return {
       ...state,
-      races: data3
-    }   */
+      races: deleteById,
+      copyOfRaces: deleteById
+    }  
     default:
       return state;
   }

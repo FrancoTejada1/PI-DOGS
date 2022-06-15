@@ -9,12 +9,10 @@ export const FILTER_BY_TEMPERAMENTS = "FILTER_BY_TEMPERAMENTS";
 export const FILTER_BY_UPLOADED = "FILTER_BY_UPLOADED";
 export const SORT_BY_NAME = "SORT_BY_NAME";
 export const SORT_BY_WEIGHT = "SORT_BY_WEIGHT";
-export const SORT_BY_HEIGHT = "SORT_BY_HEIGHT";
-export const MAYOR_WEIGHT_DB = "MAYOR_WEIGHT_DB";
-
+export const DELETE_RACE = "DELETE_RACE";
 
 export function getAllRaces() {
-  return function (dispatch) {
+  return function(dispatch) {
     axios.get(`http://localhost:3001/dogs`)
     .then((json) => {
         dispatch({
@@ -115,22 +113,15 @@ export function sortByWeight(payload) {
   }
 };
 
-export function sortByHeight(payload) {
-  return {
-    type: SORT_BY_HEIGHT,
-    payload: payload
+export function deleteRace(id) {
+  return function (dispatch) {
+    axios.delete(`http://localhost:3001/dogs/${id}`)
+    .then(json => {
+      dispatch({
+        type: DELETE_RACE,
+        payload: json.data
+      })
+    })
   }
-};
 
-/* export function mayorDB(payload) {
-  return {
-    type: MAYOR_WEIGHT_DB,
-    payload: payload
-  }
-} */
-
-/* export function destroyRace(id) {
-  return function(dispatch) {
-    axios.get(`http:`)
-  }
-} */
+}
